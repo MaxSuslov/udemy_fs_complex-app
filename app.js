@@ -1,4 +1,4 @@
-//using git is a brain fuck, fucking fuck!
+//using git is amazing!
 const express = require('express')
 const app = express()
 
