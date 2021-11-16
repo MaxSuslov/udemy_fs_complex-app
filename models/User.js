@@ -1,12 +1,28 @@
+const validator = require("validator")
+
 let User = function(data) {
 this.data = data 
-//// --> not recommended due to overload if thousends of instances - for every instance a copy of this method is being created
-// this.jump = function(){}
+this.errors = []
 }
 
-// Usning this synthax JS will not need to create a copy for each created objects, but each object will have access to this one copy of this method.
+User.prototype.validate = function() {
+   if (this.data.username == "") {this.errors.push("You must provide a username")}
+   if (this.data.username != "" && !validator.isAlphanumeric(this.data.username)) {this.errors.push("Username can only contain numbers and letters")}
+  // using validator npm package (npm install validator); validator.isEmail() returns boolean
+   if (!validator.isEmail(this.data.email)) {this.errors.push("You must provide a valid email address")}
+   if (this.data.password == "") {this.errors.push("You must provide a password")}
+   if (this.data.password.length > 0 && this.data.password < 12) {this.errors.push("Password must be at least 12 characters")}
+   if (this.data.password.length > 100) {this.errors.push("Password cannot exceed 100 characters")}
+   if (this.data.username.length > 0 && this.data.password < 3) {this.errors.push("Username must be at least 3 characters")}
+   if (this.data.username.length > 30) {this.errors.push("Username cannot exceed 30 characters")}
+ }
+
 User.prototype.register = function() {
-   
+   // Step #1: Validate user data
+  this.validate()
+
+   // Step #2: Only if there are no validation errors
+   // then save the user data in the database
 }
 
 module.exports = User
