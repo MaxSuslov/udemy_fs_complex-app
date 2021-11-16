@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "push": "git push https://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@github.com/MaxSuslov/udemy_fs_complex-app.git",
     "watch": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
