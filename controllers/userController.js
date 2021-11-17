@@ -1,9 +1,12 @@
 const User = require('../models/User')
 
 exports.login = function(req, res) {
+  // req.body is data from request posted via <form action="/login"> 
   let user = new User(req.body)
-  user.login(function(result) {
+  user.login().then(function(result) {
     res.send(result)
+  }).catch(function(err) {
+    res.send(err)
   })
 }
 
