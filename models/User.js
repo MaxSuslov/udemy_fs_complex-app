@@ -5,6 +5,19 @@ this.data = data
 this.errors = []
 }
 
+User.prototype.cleanup = function () {
+   if (typeof(this.data.username) != "sting") {this.data.username = ""}
+   if (typeof(this.data.email) != "sting") {this.data.email = ""}
+   if (typeof(this.data.password) != "sting") {this.data.password = ""}
+
+   // get rid of any bogus properties
+   this.data = {
+      username: this.data.username.trim().toLowerCase(),
+      email: this.data.email.trim().toLowerCase(),
+      password: this.data.password
+   }
+}
+
 User.prototype.validate = function() {
    if (this.data.username == "") {this.errors.push("You must provide a username")}
    if (this.data.username != "" && !validator.isAlphanumeric(this.data.username)) {this.errors.push("Username can only contain numbers and letters")}
@@ -19,6 +32,7 @@ User.prototype.validate = function() {
 
 User.prototype.register = function() {
    // Step #1: Validate user data
+  this.cleanUp()
   this.validate()
 
    // Step #2: Only if there are no validation errors
