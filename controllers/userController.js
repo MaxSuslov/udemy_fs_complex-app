@@ -4,6 +4,7 @@ exports.login = function(req, res) {
   // req.body is data from request posted via <form action="/login"> 
   let user = new User(req.body)
   user.login().then(function(result) {
+    req.session.user = {favColor: "blue", username: user.data.username}
     res.send(result)
   }).catch(function(err) {
     res.send(err)
@@ -25,5 +26,9 @@ exports.register = function(req, res) {
 }
 
 exports.home = function(req, res) {
-  res.render('home-guest')
+  if (req.session.user) {
+    res.send("Welcome to the actual application!")
+  } else {
+    res.render('home-guest')
+  }
 }
