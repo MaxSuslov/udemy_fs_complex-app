@@ -1,9 +1,8 @@
 {
-  "name": "Udemy_complex-App",
+  "name": "udemy-complex-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "start": "app.js",
   "scripts": {
     "watch": "nodemon db",
     "test": "echo \"Error: no test specified\" && exit 1"
